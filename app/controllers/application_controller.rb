@@ -15,12 +15,13 @@ class ApplicationController < ActionController::API
         if auth_header
             token = auth_header.split(' ')[1]
             # headers: { 'Authorization': 'Bearer <token>' }
-        begin
-            JWT.decode(token, 'my_s3cr3t', true, algorithm: 'HS256')
-            #JWT.decode => [{ "beef"=>"steak" }, { "alg"=>"HS256" }]
+            begin
+                JWT.decode(token, 'my_s3cr3t', true, algorithm: 'HS256')
+                #JWT.decode => [{ "beef"=>"steak" }, { "alg"=>"HS256" }]
             rescue JWT::DecodeError 
-            #instead of crashing and resulting in a 500 internal service error if invalid, return nil
-            nil
+                #instead of crashing and resulting in a 500 internal service error if invalid, return nil
+                nil
+            end
         end
     end
 
