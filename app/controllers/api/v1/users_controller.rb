@@ -1,4 +1,6 @@
 class Api::V1::UsersController < ApplicationController
+  #user can't be authenticated if they don't exist
+  skip_before_action :authorized, only: [:create]
     def create
         @user = User.create(user_params)
         if @user.valid?
