@@ -8,8 +8,14 @@ class Api::V1::AuthController < ApplicationController
         # encode token comes from ApplicationController
         token = encode_token({ user_id: @user.id })
         render json: { user: UserSerializer.new(@user), jwt: token }, status: :accepted
-      else
-        render json: { message: 'Invalid email or password' }, status: :unauthorized
+      elsif  user_login_params[:email] == ''
+        render json: { error: 'Email cannot be blank' }, status: :unauthorized
+      elsif user_login_params[:password] == ''
+        render json: { error: 'Password cannot be blank' }, status: :unauthorized
+      elsif !User.find_by(email: user_login_params[:email])
+        render json: { error: 'User not found' }, status: :unauthorized
+      else 
+        render json: { error: 'Incorrect password' }, status: :unauthorized
       end
     end
   
