@@ -1,0 +1,5 @@
+class AddUserIdToTripsTable < ActiveRecord::Migration[5.2]
+  def change
+    add_column :trips, :user_id, :integer
+  end
+end
