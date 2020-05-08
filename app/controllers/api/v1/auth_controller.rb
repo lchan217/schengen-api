@@ -18,6 +18,11 @@ class Api::V1::AuthController < ApplicationController
         render json: { error: 'Incorrect password' }, status: :unauthorized
       end
     end
+
+    # def destroy
+    #     current_user.destroy
+    #     render json: { message: 'Log Out Successful' }, status: :accepted
+    # end
   
     private
   

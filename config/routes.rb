@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       resources :trips
       post '/login', to: 'auth#create'
       get '/profile', to: 'users#profile'
+      get '/logout', to: 'auth#destroy'
     end
   end
 end
