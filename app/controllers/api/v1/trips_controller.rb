@@ -7,7 +7,10 @@ class Api::V1::TripsController < ApplicationController
     end
 
     def create 
-        # logic to assign passed attr
+        trip = Trip.new(trip_params)
+        trip.update(user_id: current_user.id)
+        trip.assign_attrs(trip)
+        byebug
     end 
 
     def trip_params
