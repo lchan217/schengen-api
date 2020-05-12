@@ -11,7 +11,7 @@ class Trip < ApplicationRecord
     end
 
     def exit_cannot_be_before_entry
-        if exit+1 < entry 
+        if exit && exit+1 < entry 
             errors.add(:exit, "Date of exit cannot be before date of entry")
         end
     end

@@ -9,8 +9,12 @@ class Api::V1::TripsController < ApplicationController
     def create 
         trip = Trip.new(trip_params)
         trip.update(user_id: current_user.id)
-        trip.assign_attrs(trip)
-        byebug
+        if trip.valid? 
+            trip.assign_attrs(trip)
+            render json: { message: "Trip created" }, status: :created
+        else 
+            render json: { error: trip.errors.full_messages }, status: :not_acceptable
+        end
     end 
 
     def trip_params
