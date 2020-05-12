@@ -11,7 +11,7 @@ class Api::V1::TripsController < ApplicationController
         trip.update(user_id: current_user.id)
         if trip.valid? 
             trip.assign_attrs(trip)
-            render json: { message: "Trip created" }, status: :created
+            render json: { message: trip }, status: :created
         else 
             render json: { error: trip.errors.full_messages }, status: :not_acceptable
         end

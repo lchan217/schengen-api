@@ -8,6 +8,7 @@ class Trip < ApplicationRecord
     def assign_attrs(trip)
         trip.exit+1 > Date.current() ? trip.passed = 0 : trip.passed = 1
         trip.time_passed = (trip.exit+1 - trip.entry).to_i
+        trip.save
     end
 
     def exit_cannot_be_before_entry
