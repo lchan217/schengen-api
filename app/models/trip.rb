@@ -13,11 +13,10 @@ class Trip < ApplicationRecord
 
     def schengen_countries
         countries = ["Austria", "Belgium", "Czech Republic", "Denmark", "Estonia", "Finland", "France", "Germany", "Greece", "Hungary", "Iceland", "Italy", "Latvia", "Liechtenstein", "Lithuania", "Luxembourg", "Malta", "Netherlands", "Norway", "Poland", "Portugal", "Slovakia", "Slovenia", "Spain", "Sweden", "Switzerland"]
-
         errors.add(:location, "must be in the Schengen Area") if !countries.include?(location)
     end 
 
     def exit_cannot_be_before_entry
-        errors.add(:exit, "Date of exit cannot be before date of entry") if exit && exit+1 < entry 
+        errors.add(:exit, "Date of exit cannot be before date of entry") if exit < entry 
     end
 end
