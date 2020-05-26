@@ -1,6 +1,7 @@
 class Api::V1::TripsController < ApplicationController
     def index
         trips = current_user.trips
+        Trip.date_check(trips)
         past = trips.select {|trip| trip.passed == true}
         future = trips.select {|trip| trip.passed == false}
         render json: {past: past, future: future}, status: 201

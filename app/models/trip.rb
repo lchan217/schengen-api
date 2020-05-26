@@ -19,4 +19,11 @@ class Trip < ApplicationRecord
     def exit_cannot_be_before_entry
         errors.add(:exit, "Date of exit cannot be before date of entry") if exit < entry 
     end
+
+    def self.date_check(trips)
+        trips.each do |trip| 
+            trip.exit+1 > Date.current() ? trip.passed = 0 : trip.passed = 1
+            trip.save
+        end 
+    end
 end
