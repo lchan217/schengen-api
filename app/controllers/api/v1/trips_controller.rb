@@ -4,7 +4,8 @@ class Api::V1::TripsController < ApplicationController
         Trip.date_check(trips)
         past = trips.select {|trip| trip.passed == true}
         future = trips.select {|trip| trip.passed == false}
-        render json: {past: past, future: future}, status: 201
+        active = trips.select {|trip| trip.entry > Date.current() - 181}
+        render json: {past: past, future: future, active: active}, status: 201
     end
 
     def create 
